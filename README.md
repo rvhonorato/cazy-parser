@@ -1,6 +1,8 @@
 # cazy-parser
 *A way to extract specific information from the Carbohydrate-Active enZYmes.*
 
+License: [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.html)
+
 If you are using this tool, **make sure to cite and visit CAZy website**
 
 * http://www.cazy.org/
@@ -9,7 +11,7 @@ If you are using this tool, **make sure to cite and visit CAZy website**
 ### Introduction
  *cazy-parser* is a tool that extract information from CAZy in a more usable and readable format. Firstly, a script reads the HTML structure and creates a mirror of the database as a tab delimited file. Secondly, information is extracted from the database according to user inputted parameters and presented to the user as a multifasta.
 
-### Dependencies
+### Requirements
 
 * Python 2.x
 * [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/) module
