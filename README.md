@@ -5,6 +5,8 @@
 
 License: [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.html)
 
+**BUG FOUND, v1.0 unstable with potential block from NCBI**
+
 If you are using this tool, **make sure to cite and visit CAZy website**
 
 * http://www.cazy.org/
@@ -79,7 +81,7 @@ PL42_characterized.fasta
 
 ### Known bugs
 
-None (yet).
+**Sequence retrieval is done using the wrong NCBI service, thus blocking access to the site. Issue is being addressed.**
 
 #### Contact info
 
