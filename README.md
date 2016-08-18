@@ -1,6 +1,8 @@
 # cazy-parser
 *A way to extract specific information from the Carbohydrate-Active enZYmes.*
 
+[![DOI](https://zenodo.org/badge/23946/rodrigovrgs/cazy-parser.svg)](https://zenodo.org/badge/latestdoi/23946/rodrigovrgs/cazy-parser)
+
 License: [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.html)
 
 If you are using this tool, **make sure to cite and visit CAZy website**
