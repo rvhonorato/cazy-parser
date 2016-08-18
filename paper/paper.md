@@ -6,7 +6,7 @@
  authors:
   - name: Rodrigo V Honorato
   - orcid: 0000-0001-5267-3002
-  - affiliation: CNPEM / LNBio
+  - affiliation: Brazilian Center for Research in Energy and Materials (CNPEM) / Brazilian Biosciences National Laboratory
  date: 18 August 2016
  bibliography: paper.bib
  ---
