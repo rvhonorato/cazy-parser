@@ -173,7 +173,6 @@ for e_class in enzyme_classes:
 						# check if there are subfamilies
 						try:
 							db_dic[protein_counter]['subfamily'] = tds[6].text.replace('&nbsp;','')
-							print tds[6].text.replace('&nbsp;','')
 						except:
 							db_dic[protein_counter]['subfamily'] = ''
 
@@ -193,7 +192,6 @@ header = '\t'.join(db_dic[0].keys())
 out.write(header + '\n')
 
 for p in db_dic:
-	# print p, '\t'.join(db_dic[p].values())
 	tbw = '\t'.join(db_dic[p].values())
 	tbw = tbw.encode('utf8') # make sure codification is ok
 	out.write(tbw + '\n')

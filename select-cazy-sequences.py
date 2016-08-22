@@ -25,30 +25,6 @@ import os, sys, itertools, urllib, argparse
 #==============================================================================#
 
 #==============================================================================#
-# Functions
-#==============================================================================#
-def fetch_ncbi_seq(protein_id):
-	if protein_id == 'unavailable':
-		# there is no id for this...!
-		fasta = ''
-		check = True
-	else:
-		link = 'http://www.ncbi.nlm.nih.gov/sviewer/viewer.cgi?tool=portal&sendto=on&log$=seqview&db=protein&dopt=fasta&sort=&val=%s&from=begin&to=end&maxplex=1' % protein_id
-		check = False
-		while check == False:
-			try:
-				fasta = urllib.urlopen(link).read()
-				if fasta[0] != '>':
-					# not a true fasta line
-					pass
-				if fasta[0] == '>':
-					# this is it!
-					check = True
-			except:
-				pass
-	return fasta
-
-#==============================================================================#
 # Options
 #==============================================================================#
 parser = argparse.ArgumentParser(description='CAZY-Parser, a simple way to retrieve fasta sequences from CAZY DB')
@@ -94,15 +70,13 @@ if bool(results.target_family):
 		if db[e]['family'] == results.target_family:
 			selection_list.append(db[e]['genbank'])
 
-	# output
 	print '>> Selecting all %i proteins from Family %s' % (len(selection_list), results.target_family)
-	out_f = '%s.fasta' % results.target_family
-	out = open(out_f, 'w')
-	for i, protein in enumerate(selection_list):
-		print '> %s :: %i' % (protein, len(selection_list)-i)
-		fasta = fetch_ncbi_seq(protein)
-		out.write(fasta)
 
+	l = list(set(selection_list))
+
+	out_f = '%s.csv' % results.target_family
+	out = open(out_f, 'w')
+	out.write('\n'.join(l))
 	out.close()
 
 #==============================================================================#
@@ -122,14 +96,12 @@ if bool(results.subfamily):
 	# output
 	print '>> Creating multifasta for all %i subfamilies for Family %s' % (len(selection_dic), results.target_family)
 	for sub in selection_dic:
-		out_f = '%s_sub%s.fasta' % (results.target_family, sub)
+
+		l = list(set(selection_dic[sub]))
+
+		out_f = '%s_sub%s.csv' % (results.target_family, sub)
 		out = open(out_f,'w')
-
-		for i, protein in enumerate(selection_dic[sub]):
-			print '> sub%s :: %s :: %i' % (sub, protein, len(selection_dic[sub])-i)
-			fasta = fetch_ncbi_seq(protein)
-			out.write(fasta)
-
+		out.write('\n'.join(l))
 		out.close()
 
 #==============================================================================#
@@ -143,13 +115,11 @@ if bool(results.characterized):
 		if db[e]['family'] == results.target_family and bool(db[e]['tag']):
 			selection_list.append(db[e]['genbank'])
 
-	# output
 	print '>> Selecting %i CHARACTERIZED proteins for Family %s' % (len(selection_list), results.target_family)
-	out_f = '%s_characterized.fasta' % results.target_family
-	out = open(out_f, 'w')
-	for i, protein in enumerate(selection_list):
-		print '> %s :: %i' % (protein, len(selection_list)-i)
-		fasta = fetch_ncbi_seq(protein)
-		out.write(fasta)
 
+	l = list(set(selection_list))
+
+	out_f = '%s_characterized.csv' % results.target_family
+	out = open(out_f, 'w')
+	out.write('\n'.join(selection_list))
 	out.close()
