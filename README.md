@@ -5,15 +5,13 @@
 
 License: [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.html)
 
-**BUG FOUND, v1.0 unstable with potential block from NCBI**
-
 If you are using this tool, **make sure to cite and visit CAZy website**
 
 * http://www.cazy.org/
 * Lombard V, Golaconda Ramulu H, Drula E, Coutinho PM, Henrissat B (2014) The Carbohydrate-active enzymes database (CAZy) in 2013. **Nucleic Acids Res** 42:D490–D495. [PMID: [24270786](http://www.ncbi.nlm.nih.gov/sites/entrez?db=pubmed&cmd=search&term=24270786)].
 
 ### Introduction
- *cazy-parser* is a tool that extract information from CAZy in a more usable and readable format. Firstly, a script reads the HTML structure and creates a mirror of the database as a tab delimited file. Secondly, information is extracted from the database according to user inputted parameters and presented to the user as a multifasta.
+ *cazy-parser* is a tool that extract information from CAZy in a more usable and readable format. Firstly, a script reads the HTML structure and creates a mirror of the database as a tab delimited file. Secondly, information is extracted from the database according to user inputted parameters and presented to the user as a set of accession codes.
 
 ### Requirements
 
@@ -35,13 +33,13 @@ If you are using this tool, **make sure to cite and visit CAZy website**
 
 `--family` Family to be searched, case sensitive
 
-`--subfamilies` Create a multifasta for each subfamily
+`--subfamilies` Create a file for each subfamily
 
-`--characterized` Create a multifasta containing only characterized enzymes
+`--characterized` Create a file containing only characterized enzymes
 
 ### Examples
 
-1) Extract all sequences from family 9 of Glycosyl Transferases.
+1) Extract all accession codes from family 9 of Glycosyl Transferases.
 
 `$ python select-cazy-sequences --db CAZy_DB_xx-xx-xxxx.csv --family GT9`
 
@@ -50,7 +48,7 @@ This will generate the following files:
 GT9.fasta
 ```
 
-2) Extract all sequences from family 43 of Glycoside Hydrolase, including subfamilies
+2) Extract all accession codes from family 43 of Glycoside Hydrolase, including subfamilies
 
 `$ python select-cazy-sequences --db CAZy_DB_xx-xx-xxxx.csv --family GH43 --subfamilies`
 
@@ -63,7 +61,7 @@ GH43_sub1.fasta
 GH43_sub37.fasta
 ```
 
-3) Extract all sequences from family 42 of Polysaccharide Lyases including characterized entries
+3) Extract all accession codes from family 42 of Polysaccharide Lyases including characterized entries
 
 `$ python select-cazy-sequences --db CAZy_DB_xx-xx-xxxx.csv --family PL42 --characterized`
 
@@ -81,7 +79,7 @@ PL42_characterized.fasta
 
 ### Known bugs
 
-**Sequence retrieval is done using the wrong NCBI service, thus blocking access to the site. Issue is being addressed.**
+**Sequence retrieval was done using the wrong NCBI service, thus blocking access to the site. Issue is being addressed.**
 
 #### Contact info
 
