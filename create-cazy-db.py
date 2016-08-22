@@ -71,6 +71,7 @@ for e_class in enzyme_classes:
 	print '>> %s' % e_class
 	main_class_link = 'http://www.cazy.org/%s.html' % e_class
 
+
 	#==============================================================================#
 	# Family section
 	#==============================================================================#
