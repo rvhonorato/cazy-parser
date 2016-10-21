@@ -1,2 +1,1 @@
 cazy_parser
-paper

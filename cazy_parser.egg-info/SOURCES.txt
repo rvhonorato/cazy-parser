@@ -10,4 +10,3 @@ cazy_parser.egg-info/dependency_links.txt
 cazy_parser.egg-info/entry_points.txt
 cazy_parser.egg-info/requires.txt
 cazy_parser.egg-info/top_level.txt
-paper/__init__.py
