@@ -1,0 +1,13 @@
+README.rst
+setup.cfg
+setup.py
+cazy_parser/__init__.py
+cazy_parser/create_cazy_db.py
+cazy_parser/extract_cazy_ids.py
+cazy_parser.egg-info/PKG-INFO
+cazy_parser.egg-info/SOURCES.txt
+cazy_parser.egg-info/dependency_links.txt
+cazy_parser.egg-info/entry_points.txt
+cazy_parser.egg-info/requires.txt
+cazy_parser.egg-info/top_level.txt
+paper/__init__.py

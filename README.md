@@ -5,65 +5,81 @@
 
 License: [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.html)
 
-If you are using this tool, **make sure to cite and visit CAZy website**
+If you are using this tool, **make sure to cite and visit the CAZy website**
 
 * http://www.cazy.org/
 * Lombard V, Golaconda Ramulu H, Drula E, Coutinho PM, Henrissat B (2014) The Carbohydrate-active enzymes database (CAZy) in 2013. **Nucleic Acids Res** 42:D490–D495. [PMID: [24270786](http://www.ncbi.nlm.nih.gov/sites/entrez?db=pubmed&cmd=search&term=24270786)].
 
-### Introduction
- *cazy-parser* is a tool that extract information from CAZy in a more usable and readable format. Firstly, a script reads the HTML structure and creates a mirror of the database as a tab delimited file. Secondly, information is extracted from the database according to user inputted parameters and presented to the user as a set of accession codes.
+## Introduction
+ *cazy-parser* is a tool that extract information from [CAZy](http://www.cazy.org/) in a more usable and readable format. Firstly, a script reads the HTML structure and creates a mirror of the database as a tab delimited file. Secondly, information is extracted from the database according to user inputted parameters and presented to the user as a set of accession codes.
 
-### Requirements
+## Installation
+`pip install cazy-parser`
 
-* Python 2.x
-* [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/) module
+## Usage
 
-### Usage
-
-*Both steps require an internet conection*
+*Please note that both steps require an internet conection*
 
 1) Database creation
 
-`$ python create-cazy-db.py`
+`$ create_cazy_db`
+
+(-h for help)
+* This script will parse the [CAZy](http://www.cazy.org/) database website and create a comma separated table containing the following information:
+    * domain
+    * protein_name
+    * family
+    * tag *(characterized status)*
+    * organism_code
+    * [EC](http://www.enzyme-database.org/) number (ec stands for enzyme comission number)
+    * [GENBANK](https://www.ncbi.nlm.nih.gov/genbank/) id
+    * [UNIPROT](uniprot.org) code
+    * subfamily
+    * organism
+    * [PDB](http://www.rcsb.org/) code
 
 2) Extract sequences
 
-`$ python select-cazy-sequences --db <database>`
-* Options:
+* Based on the previously generated csv table, extract accession codes for a given protein family.
 
-`--family` Family to be searched, case sensitive
+`$ extract_cazy_ids --db <database> --family <family code>`
 
-`--subfamilies` Create a file for each subfamily
+(-h for help)
+* Optional:
 
-`--characterized` Create a file containing only characterized enzymes
+`--subfamilies` Create a file for each subfamily, default = False
 
-### Examples
+`--characterized` Create a file containing only characterized enzymes, default = False
+
+## Usage examples
 
 1) Extract all accession codes from family 9 of Glycosyl Transferases.
 
-`$ python select-cazy-sequences --db CAZy_DB_xx-xx-xxxx.csv --family GT9`
+`$ extract_cazy_ids --db CAZy_DB_xx-xx-xxxx.csv --family GT9`
 
 This will generate the following files:
 ```
-GT9.fasta
+GT9.csv
 ```
 
 2) Extract all accession codes from family 43 of Glycoside Hydrolase, including subfamilies
 
-`$ python select-cazy-sequences --db CAZy_DB_xx-xx-xxxx.csv --family GH43 --subfamilies`
+`$ extract_cazy_ids --db CAZy_DB_xx-xx-xxxx.csv --family GH43 --subfamilies`
 
 This will generate the following files:
 
 ```
-GH43.fasta
-GH43_sub1.fasta
+GH43.csv
+GH43_sub1.csv
+GH43_sub2.csv
+GH43_sub3.csv
 (...)
-GH43_sub37.fasta
+GH43_sub37.csv
 ```
 
 3) Extract all accession codes from family 42 of Polysaccharide Lyases including characterized entries
 
-`$ python select-cazy-sequences --db CAZy_DB_xx-xx-xxxx.csv --family PL42 --characterized`
+`$ extract_cazy_ids --db CAZy_DB_xx-xx-xxxx.csv --family PL42 --characterized`
 
 This will generate the following files:
 
@@ -72,14 +88,14 @@ PL42.fasta
 PL42_characterized.fasta
 ```
 
-### To-do
+## To-do and how to contribute
 
-1. Extract sequences based on organism/domain
-2. Select structural data
+Please refer to CONTRIBUTE.md
+
 
 ### Known bugs
 
-**Sequence retrieval was done using the wrong NCBI service, thus blocking access to the site. Issue is being addressed.**
+None, yet.
 
 #### Contact info
 

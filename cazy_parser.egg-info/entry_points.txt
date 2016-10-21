@@ -1,0 +1,4 @@
+[console_scripts]
+create_cazy_db = cazy_parser.create_cazy_db:main
+extract_cazy_ids = cazy_parser.extract_cazy_ids:main
+
