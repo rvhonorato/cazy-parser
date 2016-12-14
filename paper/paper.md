@@ -5,8 +5,11 @@ tags:
  - cazy
 authors:
   - name: Rodrigo V Honorato
-  - orcid: 0000-0001-5267-3002
-  - affiliation: Brazilian Center for Research in Energy and Materials (CNPEM) / Brazilian Biosciences National Laboratory
+    orcid: 0000-0001-5267-3002
+    affiliation: 1
+affiliations:
+  - name: Brazilian Center for Research in Energy and Materials (CNPEM) / Brazilian Biosciences National Laboratory
+    index: 1
 date: 18 August 2016
 bibliography: paper.bib
 ---
