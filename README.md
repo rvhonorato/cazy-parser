@@ -5,10 +5,18 @@
 
 License: [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.html)
 
-If you are using this tool, **make sure to cite and visit the CAZy website**
+**If you are using this tool please read and cite the paper!**
+
+[RV Honorato. CAZy-parser a way to extract information from the Carbohydrate-Active enZYmes Database. *The Journal of Open Source Software*, 1(8), dec 2016.](https://github.com/openjournals/joss-papers/blob/master/joss.00053/10.21105.joss.00053.pdf)
+
+doi: 10.21105/joss.00053
+
+**Also make sure to visit and cite the CAZy website**
 
 * http://www.cazy.org/
 * Lombard V, Golaconda Ramulu H, Drula E, Coutinho PM, Henrissat B (2014) The Carbohydrate-active enzymes database (CAZy) in 2013. **Nucleic Acids Res** 42:D490–D495. [PMID: [24270786](http://www.ncbi.nlm.nih.gov/sites/entrez?db=pubmed&cmd=search&term=24270786)].
+
+_____
 
 ## Introduction
  *cazy-parser* is a tool that extract information from [CAZy](http://www.cazy.org/) in a more usable and readable format. Firstly, a script reads the HTML structure and creates a mirror of the database as a tab delimited file. Secondly, information is extracted from the database according to user inputted parameters and presented to the user as a set of accession codes.
