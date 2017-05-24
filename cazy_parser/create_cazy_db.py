@@ -21,21 +21,20 @@
 import os, sys, urllib, re, string, time, string, argparse
 from bs4 import BeautifulSoup
 
-def logo():
-	print '''
-		  ___   __   ____  _  _     ____   __   ____  ____  ____  ____
-		 / __) / _\ (__  )( \/ )___(  _ \ / _\ (  _ \/ ___)(  __)(  _ \\
-		( (__ /    \ / _/  )  /(___)) __//    \ )   /\___ \ ) _)  )   /
-		 \___)\_/\_/(____)(__/     (__)  \_/\_/(__\_)(____/(____)(__\_)
-
-		A simple way to retrieve fasta sequences from CAZy Database (:
-
-			This is the database creator script.
-
-'''
-
 def main():
-	logo()
+
+	print '''
+            ___   __   ____  _  _     ____   __   ____  ____  ____  ____
+           / __) / _\ (__  )( \/ )___(  _ \ / _\ (  _ \/ ___)(  __)(  _ \\
+          ( (__ /    \ / _/  )  /(___)) __//    \ )   /\___ \ ) _)  )   /
+           \___)\_/\_/(____)(__/     (__)  \_/\_/(__\_)(____/(____)(__\_)
+
+			A simple way to retrieve fasta sequences from CAZy Database (:
+
+				This is the database creator script.
+
+	'''
+
 	parser = argparse.ArgumentParser(description='Generate a comma separated table with information gathered from the CAZy database; internet connection is required.')
 	args = parser.parse_args()
 
@@ -93,7 +92,7 @@ def main():
 		#==============================================================================#
 		# Family section
 		#==============================================================================#
-		soup = BeautifulSoup(urllib.urlopen(main_class_link))
+		soup = BeautifulSoup(urllib.urlopen(main_class_link), "lxml")
 		# soup = BeautifulSoup(urllib.urlopen(main_class_link), 'lxml')
 		family_table = soup.findAll(name='table')[0]
 		rows = family_table.findAll(name='td')
@@ -108,7 +107,7 @@ def main():
 			print '> %s' % family
 			#
 			main_link = 'http://www.cazy.org/%s.html' % family
-			family_soup = BeautifulSoup(urllib.urlopen(main_link))
+			family_soup = BeautifulSoup(urllib.urlopen(main_link), 'lxml')
 			# main_link_dic = {'http://www.cazy.org/%s_all.html#pagination_PRINC' % family: '',
 			# 	'http://www.cazy.org/%s_characterized.html#pagination_PRINC' % family: 'characterized'}
 			#====================#
@@ -124,14 +123,15 @@ def main():
 
 				page_zero = main_link
 
-				soup = BeautifulSoup(urllib.urlopen(main_link))
+				soup = BeautifulSoup(urllib.urlopen(main_link), "lxml")
 
 				# Get page list for the family // 1, 2, 3, 4, 5, 7
 				page_index_list = soup.findAll(name = 'a', attrs={'class':'lien_pagination'})
-				# page_list = ['http://www.cazy.org/' + str(l['href']) for l in page_index_list] # deprecated
+
 				if bool(page_index_list):
-					first_page_idx = int(page_index_list[0]['href'].split('PRINC=')[-1].split('#')[0]) # be careful with this
-					last_page_idx = int(page_index_list[-2]['href'].split('PRINC=')[-1].split('#')[0]) # be careful with this
+
+					first_page_idx = int(re.findall('=(\d*)#', str(page_index_list[0]))[0]) # be careful with this
+					last_page_idx = int(re.findall('=(\d*)#', str(page_index_list[-2]))[0]) # be careful with this
 
 					# generate page_list
 					page_list = []
@@ -147,7 +147,7 @@ def main():
 				for link in page_list:
 					# print link
 					# tr  = rows // # td = cells
-					soup = BeautifulSoup(urllib.urlopen(link))
+					soup = BeautifulSoup(urllib.urlopen(link), "lxml")
 					table = soup.find('table', attrs={'class':'listing'})
 					domain = ''
 
@@ -222,4 +222,5 @@ def main():
 
 if __name__ == '__main__':
 	main()
+	
 # done.
