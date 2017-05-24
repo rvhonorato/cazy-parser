@@ -20,6 +20,9 @@ _____
 
 ## Introduction
  *cazy-parser* is a tool that extract information from [CAZy](http://www.cazy.org/) in a more usable and readable format. Firstly, a script reads the HTML structure and creates a mirror of the database as a tab delimited file. Secondly, information is extracted from the database according to user inputted parameters and presented to the user as a set of accession codes.
+ 
+## Changelog
+v1.1 - Fixed bug when identifying page indexes
 
 ## Installation
 `$ pip install cazy-parser`
