@@ -23,6 +23,7 @@ _____
  
 ## Changelog
 v1.2 - Fixed (yet) another bug when parsing page indexes
+
 v1.1 - Fixed bug when identifying page indexes
 
 ## Installation
