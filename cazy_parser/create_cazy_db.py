@@ -85,6 +85,7 @@ def main():
 
 	db_dic = {}
 	protein_counter = 0
+	family_counter = 0
 	for e_class in enzyme_classes:
 		print '>> %s' % e_class
 		main_class_link = 'http://www.cazy.org/%s.html' % e_class
@@ -137,7 +138,7 @@ def main():
 					page_list = []
 					page_list.append(page_zero)
 					for i in range(first_page_idx, last_page_idx+first_page_idx, first_page_idx):
-						link = 'http://www.cazy.org/' + page_index_list[0]['href'].split('=')[0] + '=' + str(i) + '#' + page_index_list[0]['href'].split('#')[1]
+						link = 'http://www.cazy.org/' + page_index_list[0]['href'].split('=')[0] + '=' + str(i)
 						page_list.append(link)
 				else:
 					page_list = [page_zero]
@@ -204,6 +205,9 @@ def main():
 							# print '\t'.join(db_dic[protein_counter].keys())
 							# print '\t'.join(db_dic[protein_counter].values())
 							protein_counter += 1
+							family_counter += 1
+							
+		print '> %i entries found for %s' % (family_counter, family)
 
 	# Ouput
 	output_f = 'CAZy_DB_%s.csv' % time.strftime("%d-%m-%Y")
