@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 #==============================================================================#
 # Copyright (C) 2016  Rodrigo Honorato
 #
@@ -18,35 +19,42 @@
 
 #==============================================================================#
 # create a parsed database exploting CAZY html structure
-import os, sys, urllib, re, string, time, string, argparse
+import os, sys, urllib, re, string, time, string, argparse, progressbar
 from bs4 import BeautifulSoup
 
 def main():
 
 	print '''
-            ___   __   ____  _  _     ____   __   ____  ____  ____  ____
-           / __) / _\ (__  )( \/ )___(  _ \ / _\ (  _ \/ ___)(  __)(  _ \\
-          ( (__ /    \ / _/  )  /(___)) __//    \ )   /\___ \ ) _)  )   /
-           \___)\_/\_/(____)(__/     (__)  \_/\_/(__\_)(____/(____)(__\_)
 
-			A simple way to retrieve fasta sequences from CAZy Database (:
+	┌─┐┌─┐┌─┐┬ ┬   ┌─┐┌─┐┬─┐┌─┐┌─┐┬─┐
+	│  ├─┤┌─┘└┬┘───├─┘├─┤├┬┘└─┐├┤ ├┬┘
+	└─┘┴ ┴└─┘ ┴    ┴  ┴ ┴┴└─└─┘└─┘┴└─ v1.3
 
-				This is the database creator script.
+	This is the database creator script
 
 	'''
 
 	parser = argparse.ArgumentParser(description='Generate a comma separated table with information gathered from the CAZy database; internet connection is required.')
 	args = parser.parse_args()
 
+	bar = progressbar.ProgressBar(widgets=[' ', progressbar.Timer(), ' ', progressbar.Percentage(),' ', progressbar.Bar('█','[',']'), ' ', progressbar.ETA(), ' '])
+
 	#==============================================================================#
 	# Species part
 	#==============================================================================#
-	print '>> Gathering species codes for species with full genomes'
+	print '> Gathering species with full genomes'
 	# a = archea // b = bacteria // e = eukaryota // v = virus
 	species_domain_list = ['a', 'b', 'e', 'v']
 	species_dic = {}
+
+	bar.max_value = len(string.uppercase) * len(species_domain_list)
+	bar.start()
+
+	counter = 0
 	for initial in string.uppercase:
 		for domain in species_domain_list:
+			counter += 1
+			bar.update(counter)
 			link = 'http://www.cazy.org/%s%s.html' % (domain, initial)
 			f = urllib.urlopen(link)
 			species_list_hp = f.read()
@@ -58,9 +66,15 @@ def main():
 					species_dic[species].append(index)
 				except:
 					species_dic[species] = [index]
+	bar.finish()
 
 	# Double check to see which of the species codes are valid
-	for species in species_dic:
+	print '\n> Checking'
+
+	bar.max_value = len(species_dic.keys())
+	bar.start()
+	for j, species in enumerate(bar(species_dic.keys())):
+		bar.update(j+1)
 		entry_list = species_dic[species]
 		if len(entry_list) > 1:
 			# More than one entry for this species
@@ -72,10 +86,13 @@ def main():
 			species_dic[species] = selected_entry
 		else:
 			species_dic[species] = species_dic[species][0]
+	bar.finish()
 
 	#==============================================================================#
 	# Enzyme class part
 	#==============================================================================#
+
+	print '\n\n> Extracting information from classes (get a coffee, this will take a while)'
 
 	enzyme_classes = ['Glycoside-Hydrolases',
 		'GlycosylTransferases',
@@ -87,7 +104,6 @@ def main():
 	protein_counter = 0
 	family_counter = 0
 	for e_class in enzyme_classes:
-		print '>> %s' % e_class
 		main_class_link = 'http://www.cazy.org/%s.html' % e_class
 
 		#==============================================================================#
@@ -100,13 +116,37 @@ def main():
 
 		family_list = [str(r.find('a')['href'].split('/')[-1].split('.html')[0]) for r in rows]
 
-		print '>> %i families found on %s' % (len(family_list), main_class_link)
+		print '\n>> %s - fetching families' % (e_class)
 		#==============================================================================#
 		# Identification section
 		#==============================================================================#
-		for family in family_list:
-			print '> %s' % family
-			#
+		page_list = []
+
+		#### WIP
+		# if os.path.isfile('%s.link' % e_class):
+		# 	family_check = dict([(f, False) for f in family_list])
+		# 	print '>> Looking for .link file [experimental]'
+		# 	for l in open('%s.link' % e_class):
+		# 		page_list.append(l)
+		# 		# improve this
+		# 		for f in family_check:
+		# 			if f in l:
+		# 				family_check[f] = True
+		# 	for f in family_check:
+		# 		if family_check[f] == False:
+		# 			print '>>> %s.link looks incomplete, delete and try again' % e_class
+		# 			exit()
+		# else:
+		###########
+
+		# fetch
+		bar.max_value = len(family_list)
+		bar.start()
+		
+		out = open('%s.link' % e_class,'w')
+		for j, family in enumerate(family_list):
+			bar.update(j+1)
+			# print '\n>>> %s' % family
 			main_link = 'http://www.cazy.org/%s.html' % family
 			family_soup = BeautifulSoup(urllib.urlopen(main_link), 'lxml')
 			# main_link_dic = {'http://www.cazy.org/%s_all.html#pagination_PRINC' % family: '',
@@ -117,10 +157,9 @@ def main():
 			# remove structure tab, for now
 			superfamily_list = [f for f in superfamily_list if not 'structure' in f]
 
-			# DEBUG
-			# superfamily_list = superfamily_list[:-2]
 			#====================#
 			for main_link in superfamily_list:
+				main_link_idx = main_link.split('/')[-1].split('_')[-1].split('.')[0]
 
 				page_zero = main_link
 
@@ -134,78 +173,80 @@ def main():
 					first_page_idx = int(re.findall('=(\d*)#', str(page_index_list[0]))[0]) # be careful with this
 					last_page_idx = int(re.findall('=(\d*)#', str(page_index_list[-2]))[0]) # be careful with this
 
-					# generate page_list
-					page_list = []
 					page_list.append(page_zero)
+					out.write('%s\n' % page_zero)
+
 					for i in range(first_page_idx, last_page_idx+first_page_idx, first_page_idx):
 						link = 'http://www.cazy.org/' + page_index_list[0]['href'].split('=')[0] + '=' + str(i)
 						page_list.append(link)
+						out.write('%s\n' % link)
 				else:
-					page_list = [page_zero]
+					page_list.append(page_zero)
+					out.write('%s\n' % page_zero)
 
-				# page_list.append(main_link) # deprecated
-				# page_list = list(set(page_list)) # deprecated
-				for link in page_list:
-					# print link
-					# tr  = rows // # td = cells
-					soup = BeautifulSoup(urllib.urlopen(link), "lxml")
-					table = soup.find('table', attrs={'class':'listing'})
-					domain = ''
+		out.close()
 
-					# consistency check to look for deleted families. i.e. GH21
+		print '\n>>> Downloading'
+
+		bar.max_value = len(page_list)
+		bar.start()
+		for j, link in enumerate(page_list):
+			bar.update(j+1)
+			# tr  = rows // # td = cells
+			soup = BeautifulSoup(urllib.urlopen(link), "lxml")
+			table = soup.find('table', attrs={'class':'listing'})
+			domain = ''
+			family = link.split('.org/')[-1].split('_')[0]
+			# consistency check to look for deleted families. i.e. GH21
+			try:
+				check = table.findAll('tr')
+			except AttributeError:
+				# not a valid link, move on
+				continue
+			for row in table.findAll('tr'):
+				try:
+					if row['class'] == 'royaume' and row.text != 'Top':
+						domain = str(row.text).lower()
+				except:
+					pass
+				tds = row.findAll('td')
+				if len(tds) > 1 and tds[0].text != 'Protein Name':
+					# valid line
+					db_dic[protein_counter] = {}
+					db_dic[protein_counter]['protein_name'] = tds[0].text.replace('&nbsp;','')
+					db_dic[protein_counter]['family'] = family
+					db_dic[protein_counter]['domain'] = domain
+					db_dic[protein_counter]['ec'] = tds[1].text.replace('&nbsp;','')
+					db_dic[protein_counter]['organism'] = tds[2].text.replace('&nbsp;','')
 					try:
-						check = table.findAll('tr')
-					except AttributeError:
-						# not a valid link, move on
-						continue
-
-					for row in table.findAll('tr'):
-						try:
-							if row['class'] == 'royaume' and row.text != 'Top':
-								domain = str(row.text).lower()
-						except:
-							pass
-
-						tds = row.findAll('td')
-						if len(tds) > 1 and tds[0].text != 'Protein Name':
-							# valid line
-							db_dic[protein_counter] = {}
-
-							db_dic[protein_counter]['protein_name'] = tds[0].text.replace('&nbsp;','')
-							db_dic[protein_counter]['family'] = family
-							db_dic[protein_counter]['domain'] = domain
-							db_dic[protein_counter]['ec'] = tds[1].text.replace('&nbsp;','')
-							db_dic[protein_counter]['organism'] = tds[2].text.replace('&nbsp;','')
-							try:
-								db_dic[protein_counter]['genbank'] = tds[3].find('a').text.replace('&nbsp;','') # get latest entry
-							except:
-								# there is a crazy aberration when there is no genbank available
-								db_dic[protein_counter]['genbank'] = 'unavailable'
-							#
-							db_dic[protein_counter]['uniprot'] = tds[4].text.replace('&nbsp;','')
-							db_dic[protein_counter]['pdb'] = tds[5].text.replace('&nbsp;','')
-
-							# check if this is species has a complete genome
-							try:
-								db_dic[protein_counter]['organism_code'] = species_dic[tds[2].text.replace('&nbsp;','')]
-							except:
-								db_dic[protein_counter]['organism_code'] = 'invalid'
-
-							# check if there are subfamilies
-							try:
-								db_dic[protein_counter]['subfamily'] = tds[6].text.replace('&nbsp;','')
-							except:
-								db_dic[protein_counter]['subfamily'] = ''
-
-							if 'characterized' in main_link:
-								db_dic[protein_counter]['tag'] = 'characterized'
-							else:
-								db_dic[protein_counter]['tag'] = ''
-							# debug entries
-							# print '\t'.join(db_dic[protein_counter].keys())
-							# print '\t'.join(db_dic[protein_counter].values())
-							protein_counter += 1
-							family_counter += 1
+						db_dic[protein_counter]['genbank'] = tds[3].find('a').text.replace('&nbsp;','') # get latest entry
+					except:
+						# there is a crazy aberration when there is no genbank available
+						db_dic[protein_counter]['genbank'] = 'unavailable'
+					
+					db_dic[protein_counter]['uniprot'] = tds[4].text.replace('&nbsp;','')
+					db_dic[protein_counter]['pdb'] = tds[5].text.replace('&nbsp;','')
+					# check if this is species has a complete genome
+					try:
+						db_dic[protein_counter]['organism_code'] = species_dic[tds[2].text.replace('&nbsp;','')]
+					except:
+						db_dic[protein_counter]['organism_code'] = 'invalid'
+					# check if there are subfamilies
+					try:
+						db_dic[protein_counter]['subfamily'] = tds[6].text.replace('&nbsp;','')
+					except:
+						db_dic[protein_counter]['subfamily'] = ''
+					# if 'characterized' in main_link:
+					if 'characterized' in link:
+						db_dic[protein_counter]['tag'] = 'characterized'
+					else:
+						db_dic[protein_counter]['tag'] = ''
+					# debug entries
+					# print '\t'.join(db_dic[protein_counter].keys())
+					# print '\t'.join(db_dic[protein_counter].values())
+					protein_counter += 1
+					family_counter += 1
+		bar.finish()
 							
 		print '> %i entries found for %s' % (family_counter, family)
 
