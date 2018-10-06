@@ -1,7 +1,7 @@
 # cazy-parser
 *A way to extract specific information from the Carbohydrate-Active enZYmes.*
 
-[![status](http://joss.theoj.org/papers/f709afe5d720fc6eee82fca277942a46/status.svg)](http://joss.theoj.org/papers/f709afe5d720fc6eee82fca277942a46) [![DOI](https://zenodo.org/badge/65995178.svg)](https://zenodo.org/badge/latestdoi/65995178)
+[![Downloads](https://pepy.tech/badge/cazy-parser)](https://pepy.tech/project/cazy-parser) [![status](http://joss.theoj.org/papers/f709afe5d720fc6eee82fca277942a46/status.svg)](http://joss.theoj.org/papers/f709afe5d720fc6eee82fca277942a46) [![DOI](https://zenodo.org/badge/65995178.svg)](https://zenodo.org/badge/latestdoi/65995178)
 
 License: [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.html)
 
