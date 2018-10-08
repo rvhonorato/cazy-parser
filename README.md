@@ -19,11 +19,13 @@ doi: 10.21105/joss.00053
 _____
 
 ## Changelog
-v1.3 - Added progress bars since creating the database takes a long time and might look stuck
+v1.3 - Oct 7, 2018 - Added progress bars since creating the database takes a long time and might look stuck
 
-v1.2 - Fixed (yet) another bug when parsing page indexes
+v1.2 - Aug 18, 2017 - Fixed (yet) another bug when parsing page indexes
 
-v1.1 - Fixed bug when identifying page indexes
+v1.1 - May 24, 2017 - Fixed bug when identifying page indexes
+
+v1.0 - Oct 21, 2016 - First release
 
 ## Introduction
  *cazy-parser* is a tool that extract information from [CAZy](http://www.cazy.org/) in a more usable and readable format. Firstly, a script reads the HTML structure and creates a mirror of the database as a tab delimited file. Secondly, information is extracted from the database according to user inputted parameters and presented to the user as a set of accession codes.
