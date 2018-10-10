@@ -30,8 +30,8 @@ v1.0 - Oct 21, 2016 - First release
 ## Introduction
  *cazy-parser* is a tool that extract information from [CAZy](http://www.cazy.org/) in a more usable and readable format. Firstly, a script reads the HTML structure and creates a mirror of the database as a tab delimited file. Secondly, information is extracted from the database according to user inputted parameters and presented to the user as a set of accession codes.
 
-## Installation
-`$ pip install cazy-parser`
+## Install / Upgrade
+`$ pip install --upgrade cazy-parser`
 
 or
 
@@ -41,10 +41,14 @@ Download latest source from [this link](https://pypi.python.org/pypi/cazy-parser
 $ tar -zxvf cazy-parser-x.x.x.tar.gz
 $ cd cazy-parser-x.x.x
 $ python setup.py install
+
 ```
+
+Note: It my be necessary to open a new terminal.
+
 ## Usage
 
-*Please note that both steps require an internet conection*
+*Internet connection required*
 
 1) Database creation
 
@@ -64,7 +68,7 @@ $ python setup.py install
     * organism
     * [PDB](http://www.rcsb.org/) code
 
-2) Extract sequences
+2) Extract accession codes
 
 * Based on the previously generated csv table, extract accession codes for a given protein family.
 
@@ -110,18 +114,17 @@ GH43_sub37.csv
 This will generate the following files:
 
 ```
-PL42.fasta
-PL42_characterized.fasta
+PL42.csv
+PL42_characterized.csv
 ```
+
+### Download fasta sequences
+
+Go to [NCBI's Batch Entrez](https://www.ncbi.nlm.nih.gov/sites/batchentrez) change the database to protein and submit the generated `.csv`.
 
 ## To-do and how to contribute
 
 Please refer to CONTRIBUTE.md
-
-
-### Known bugs
-
-None, yet.
 
 #### Contact info
 
