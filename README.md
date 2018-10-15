@@ -61,9 +61,9 @@ Note: It my be necessary to open a new terminal.
     * family
     * tag *(characterized status)*
     * organism_code
-    * [EC](http://www.enzyme-database.org/) number (ec stands for enzyme comission number)
+    * [EC](http://www.enzyme-database.org/) number (ec stands for enzyme commission number)
     * [GENBANK](https://www.ncbi.nlm.nih.gov/genbank/) id
-    * [UNIPROT](uniprot.org) code
+    * [UNIPROT](http://uniprot.org) code
     * subfamily
     * organism
     * [PDB](http://www.rcsb.org/) code
