@@ -11,9 +11,9 @@ Installation
 ============
 ::
 
-    pip install cazy-parser
+    pip install --upgrade cazy-parser
 
 Documentation
 =============
 
-Please refer to the `project page <https://github.com/rodrigovrgs/cazy-parser/blob/master/README.md>`_  for usage and more information
+Please refer to the `project page <https://github.com/rodrigovrgs/cazy-parser/>`_  for usage and more information
