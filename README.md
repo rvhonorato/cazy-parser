@@ -23,7 +23,7 @@ _____
 I will no longer be mantaining this tool, feel free to keep developing it. (: 
 
 ## Changelog
-v1.4 - Dec X, 2018 - Moved to Python 3.6, added checkpoints for download.
+v1.4 - Dec 11, 2018 - Moved to Python 3.6, added checkpoints for download.
 
 v1.3 - Oct 7, 2018 - Added progress bars since creating the database takes a long time and might look stuck
 
