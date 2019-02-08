@@ -15,5 +15,3 @@ and specially
 ___
 
 Feel free to contact me with **suggestions**, **bugs reports** or if you need any **assistance** running the software.
-
-*rvhonorato at gmail.com*
