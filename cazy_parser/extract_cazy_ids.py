@@ -21,7 +21,7 @@ import argparse
 
 
 def logo():
-    version = '1.4'
+    version = '1.4.2'
     print('')
     print('┌─┐┌─┐┌─┐┬ ┬   ┌─┐┌─┐┬─┐┌─┐┌─┐┬─┐')
     print('│  ├─┤┌─┘└┬┘───├─┘├─┤├┬┘└─┐├┤ ├┬┘')
