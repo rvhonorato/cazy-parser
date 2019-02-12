@@ -214,7 +214,7 @@ def fetch_data(link_list, species_dic, out_f):
                 db_dic[protein_counter]['organism'] = tds[2].text.replace('&nbsp;', '')
                 try:
                     db_dic[protein_counter]['genbank'] = tds[3].find('a').text.replace('&nbsp;', '')  # get latest entry
-                except KeyError:
+                except AttributeError:
                     # there is a crazy aberration when there is no genbank available
                     db_dic[protein_counter]['genbank'] = 'unavailable'
 
@@ -273,7 +273,7 @@ def clean(out_f):
 
 
 def logo():
-    version = '1.4'
+    version = '1.4.2'
     print('')
     print('┌─┐┌─┐┌─┐┬ ┬   ┌─┐┌─┐┬─┐┌─┐┌─┐┬─┐')
     print('│  ├─┤┌─┘└┬┘───├─┘├─┤├┬┘└─┐├┤ ├┬┘')
