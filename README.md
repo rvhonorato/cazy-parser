@@ -23,6 +23,8 @@ _____
 I will no longer be ~~mantaining~~ implementing new features in this tool, feel free to keep developing it. (: 
 
 ## Changelog
+v1.4.2 - Feb 12, 2019 - Bugfix to account for missing genbank ids.
+
 v1.4.1 - Jan 15, 2019 - Bugfix in progressbars.
 
 v1.4 - Dec 11, 2018 - Moved to Python 3.6, added checkpoints for download.
