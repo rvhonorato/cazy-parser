@@ -1,2 +1,5 @@
-dist/cazy-parser*
+dist/
 paper/
+.idea/
+build/
+cazy_parser.egg-info/
