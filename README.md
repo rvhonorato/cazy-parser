@@ -11,8 +11,6 @@
 
 License: [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.html)
 
-**Please cite the *paper*!**
-
 [RV Honorato. CAZy-parser a way to extract information from the Carbohydrate-Active enZYmes Database. *The Journal of Open Source Software*, 1(8), dec 2016.](https://github.com/openjournals/joss-papers/blob/master/joss.00053/10.21105.joss.00053.pdf)
 
 doi: 10.21105/joss.00053
