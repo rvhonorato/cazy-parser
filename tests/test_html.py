@@ -64,8 +64,8 @@ def test_parse_table(table):
 
 def test_get_data_from_html():
     observed_data = get_data_from_html(
-        "http://www.cazy.org/GH173"
-        "_characterized.html")
+        "http://www.cazy.org/GH173" "_characterized.html"
+    )
 
     assert observed_data
     assert [e for e in observed_data if "protein_name" in e]
@@ -85,8 +85,7 @@ def test_fetch_links():
 
 
 def test_fetch_families():
-    observed_families = \
-        fetch_families("http://www.cazy.org/Glycoside-Hydrolases.html")
+    observed_families = fetch_families("http://www.cazy.org/Glycoside-Hydrolases.html")
 
     assert "GH1" in observed_families
 
