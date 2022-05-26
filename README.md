@@ -18,105 +18,57 @@ License: [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.html)
 
 doi: 10.21105/joss.00053
 
-# IMPORTANT
-
-Due to changes in the CAZy database, the parser is no longer functional, I will try to revive the code and update it soon. (:
 
 ## Introduction
  *cazy-parser* is a tool that extract information from [CAZy](http://www.cazy.org/) in a more usable and readable format. Firstly, a script reads the HTML structure and creates a mirror of the database as a tab delimited file. Secondly, information is extracted from the database according to user inputted parameters and presented to the user as a set of accession codes.
 
 ## Install / Upgrade
-`$ pip install --upgrade cazy-parser`
-
-or
-
-Download latest source from [this link](https://pypi.python.org/pypi/cazy-parser)
-
 ```
-$ tar -zxvf cazy-parser-x.x.x.tar.gz
-$ cd cazy-parser-x.x.x
-$ python setup.py install
-
+$ pip install --upgrade cazy-parser
 ```
 
-Note: It my be necessary to open a new terminal.
 
 ## Usage
 
 *Internet connection required*
 
-1) Database creation
-
-`$ create_cazy_db`
-
-(-h for help)
-* This script will parse the [CAZy](http://www.cazy.org/) database website and create a comma separated table containing the following information:
-    * domain
-    * protein_name
-    * family
-    * tag *(characterized status)*
-    * organism_code
-    * [EC](http://www.enzyme-database.org/) number (ec stands for enzyme comission number)
-    * [GENBANK](https://www.ncbi.nlm.nih.gov/genbank/) id
-    * [UNIPROT](https://www.uniprot.org) code
-    * subfamily
-    * organism
-    * [PDB](http://www.rcsb.org/) code
-
-2) Extract accession codes
-
-* Based on the previously generated csv table, extract accession codes for a given protein family.
-
-`$ extract_cazy_ids --db <database> --family <family code>`
-
-(-h for help)
-* Optional:
-
-`--subfamilies` Create a file for each subfamily, default = False
-
-`--characterized` Create a file containing only characterized enzymes, default = False
-
-## Usage examples
-
-1) Extract all accession codes from family 9 of Glycosyl Transferases.
-
-`$ extract_cazy_ids --db CAZy_DB_xx-xx-xxxx.csv --family GT9`
-
-This will generate the following files:
-```
-GT9.csv
-```
-
-2) Extract all accession codes from family 43 of Glycoside Hydrolase, including subfamilies
-
-`$ extract_cazy_ids --db CAZy_DB_xx-xx-xxxx.csv --family GH43 --subfamilies`
-
-This will generate the following files:
 
 ```
-GH43.csv
-GH43_sub1.csv
-GH43_sub2.csv
-GH43_sub3.csv
-(...)
-GH43_sub37.csv
+cazy-parser -h
+usage: cazy-parser [-h] [-f FAMILY] [-s SUBFAMILY] [-c CHARACTERIZED] [-v] {GH,GT,PL,CA,AA}
+
+positional arguments:
+  {GH,GT,PL,CA,AA}
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -f FAMILY, --family FAMILY
+  -s SUBFAMILY, --subfamily SUBFAMILY
+  -c CHARACTERIZED, --characterized CHARACTERIZED
+  -v, --version         show version
 ```
 
-3) Extract all accession codes from family 42 of Polysaccharide Lyases including characterized entries
+### Example
 
-`$ extract_cazy_ids --db CAZy_DB_xx-xx-xxxx.csv --family PL42 --characterized`
-
-This will generate the following files:
+Extract all fasta sequences from family 43 of Glycoside Hydrolase subfamily 1
 
 ```
-PL42.csv
-PL42_characterized.csv
+$ cazy-parser GH -f 43 -s 1
+ [2022-05-26 16:39:21,511 91 INFO] ------------------------------------------
+ [2022-05-26 16:39:21,511 92 INFO]
+ [2022-05-26 16:39:21,511 93 INFO] ┌─┐┌─┐┌─┐┬ ┬   ┌─┐┌─┐┬─┐┌─┐┌─┐┬─┐
+ [2022-05-26 16:39:21,511 94 INFO] │  ├─┤┌─┘└┬┘───├─┘├─┤├┬┘└─┐├┤ ├┬┘
+ [2022-05-26 16:39:21,511 95 INFO] └─┘┴ ┴└─┘ ┴    ┴  ┴ ┴┴└─└─┘└─┘┴└─ v2.0.0
+ [2022-05-26 16:39:21,511 96 INFO]
+ [2022-05-26 16:39:21,511 97 INFO] ------------------------------------------
+ [2022-05-26 16:39:21,511 183 INFO] Fetching links for Glycoside-Hydrolases, url: http://www.cazy.org/Glycoside-Hydrolases.html
+ [2022-05-26 16:39:22,454 189 INFO] Only using links of family 43 subfamily 1
+ [2022-05-26 16:39:23,029 26 INFO] Dowloading 1415 fasta sequences...
+ [2022-05-26 16:40:32,187 51 INFO] Dumping fasta sequences to file GH43_1_26052022.fasta
 ```
 
-### Download fasta sequences
-
-Go to [NCBI's Batch Entrez](https://www.ncbi.nlm.nih.gov/sites/batchentrez) change the database to protein and submit the generated `.csv`.
+This will generate the following file `GH43_1_DDMMYYY.fasta` containing the fasta sequences.
 
 ## To-do and how to contribute
 
-Please refer to CONTRIBUTE.md
+Please refer to [CONTRIBUTING](CONTRIBUTING.md) (:

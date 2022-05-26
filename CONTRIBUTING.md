@@ -1,16 +1,9 @@
-## cazy-parser
-*A way to extract specific information from the Carbohydrate-Active enZYmes.*
-
-# How to contribute?
+# How to contribute to cazy-parser?
 
 There are still a few features that could be implemented, such as:
 
 * Organism specific selection
 * Retrieve three dimensional structures for each family
-
-and specially
-
-* **Retrieve fasta sequences from NCBIs servers**
 
 ___
 
