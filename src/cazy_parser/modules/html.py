@@ -314,7 +314,7 @@ def fetch_species():
             species_list_hp = f.read().decode("utf-8")
             # parse webpage
             index_list = re.findall(
-                fr'"http://www.cazy.org/{species_domain_list}(\d.*).html"'
+                rf'"http://www.cazy.org/{species_domain_list}(\d.*).html"'
                 r' class="nav">(.*)</a>',
                 species_list_hp,
             )
