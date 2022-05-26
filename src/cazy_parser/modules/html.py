@@ -136,6 +136,20 @@ def get_data_from_html(link):
 
 
 def get_data_from_txt(link):
+    """
+    Retrieve information from the TXT file.
+
+    Parameters
+    ----------
+    link : str
+        Link to the page.
+
+    Returns
+    -------
+    data_list : list
+        List of dictionaries containing information from the TXT file.
+
+    """
     data_list = []
     response = requests.get(link)
     tag = "characterized" if "characterized" in link else ""
