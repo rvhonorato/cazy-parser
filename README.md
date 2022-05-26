@@ -3,7 +3,7 @@
 
 [![Downloads](https://pepy.tech/badge/cazy-parser)](https://pepy.tech/project/cazy-parser)
 [![status](http://joss.theoj.org/papers/f709afe5d720fc6eee82fca277942a46/status.svg)](http://joss.theoj.org/papers/f709afe5d720fc6eee82fca277942a46)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/479cf50114a243379e8c4f2e4056a805)](https://www.codacy.com/gh/rvhonorato/cazy-parser/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rvhonorato/cazy-parser&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/33f087332ec24da689268a13d2f4ca23)](https://www.codacy.com/gh/rvhonorato/cazy-parser/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rvhonorato/cazy-parser&amp;utm_campaign=Badge_Grade)
 [![python lint](https://github.com/rvhonorato/cazy-parser/actions/workflows/lint.yml/badge.svg)](https://github.com/rvhonorato/cazy-parser/actions/workflows/lint.yml)
 [![unittests](https://github.com/rvhonorato/cazy-parser/actions/workflows/unittests.yml/badge.svg)](https://github.com/rvhonorato/cazy-parser/actions/workflows/unittests.yml)
 
