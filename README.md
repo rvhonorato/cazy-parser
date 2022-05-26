@@ -8,32 +8,15 @@
 * http://www.cazy.org/
 * Lombard V, Golaconda Ramulu H, Drula E, Coutinho PM, Henrissat B (2014) The Carbohydrate-active enzymes database (CAZy) in 2013. **Nucleic Acids Res** 42:D490–D495. [PMID: [24270786](http://www.ncbi.nlm.nih.gov/sites/entrez?db=pubmed&cmd=search&term=24270786)].
 
-
 License: [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.html)
 
 [RV Honorato. CAZy-parser a way to extract information from the Carbohydrate-Active enZYmes Database. *The Journal of Open Source Software*, 1(8), dec 2016.](https://github.com/openjournals/joss-papers/blob/master/joss.00053/10.21105.joss.00053.pdf)
 
 doi: 10.21105/joss.00053
 
-
-_____
 # IMPORTANT
-I will no longer be ~~mantaining~~ implementing new features in this tool, feel free to keep developing it. (: 
 
-## Changelog
-v1.4.2 - Feb 12, 2019 - Bugfix to account for missing genbank ids.
-
-v1.4.1 - Jan 15, 2019 - Bugfix in progressbars.
-
-v1.4 - Dec 11, 2018 - Moved to Python 3.6, added checkpoints for download.
-
-v1.3 - Oct 7, 2018 - Added progress bars since creating the database takes a long time and might look stuck
-
-v1.2 - Aug 18, 2017 - Fixed (yet) another bug when parsing page indexes
-
-v1.1 - May 24, 2017 - Fixed bug when identifying page indexes
-
-v1.0 - Oct 21, 2016 - First release
+Due to changes in the CAZy database, the parser is no longer functional, I will try to revive the code and update it soon. (:
 
 ## Introduction
  *cazy-parser* is a tool that extract information from [CAZy](http://www.cazy.org/) in a more usable and readable format. Firstly, a script reads the HTML structure and creates a mirror of the database as a tab delimited file. Secondly, information is extracted from the database according to user inputted parameters and presented to the user as a set of accession codes.
