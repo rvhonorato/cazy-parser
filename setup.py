@@ -18,6 +18,8 @@ here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
+with open("requirements.txt") as f:
+    required = f.read().splitlines()
 
 class CazyParser(install):
     def run(self):
@@ -79,7 +81,7 @@ setup(
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=['beautifulsoup4', 'progressbar2'],
+    install_requires=required,
 
     # List additional groups of dependencies here (e.g. development
     # dependencies). You can install these using the following syntax,

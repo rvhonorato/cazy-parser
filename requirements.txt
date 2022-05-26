@@ -1,0 +1,5 @@
+beautifulsoup4==4.11.1
+certifi==2022.5.18.1
+progressbar2==4.0.0
+python-utils==3.2.3
+soupsieve==2.3.2.post1
