@@ -15,7 +15,7 @@ with open("requirements.txt") as f:
 
 setup(
     name="cazy-parser",
-    version="2.0.0",
+    version="2.0.1",
     description="A way to extract specific information from CAZy",
     long_description=long_description,
     url="https://github.com/rodrigovrgs/cazy-parser",
