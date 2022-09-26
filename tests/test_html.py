@@ -103,4 +103,4 @@ def test_retrieve_genbank_ids():
     )
 
     assert observed_id_list
-    assert len(observed_id_list) == 1163
+    assert len(observed_id_list) >= 1223
