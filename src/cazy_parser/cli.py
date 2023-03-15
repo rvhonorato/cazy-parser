@@ -113,9 +113,10 @@ def main(enzyme_class, family, subfamily, characterized):
     try:
         dump_fastas(id_list, output_fname)
     except Exception as e:
+        log.debug(e)
         output_fname = Path(output_fname).stem + ".txt"
         log.warning(
-            f"Could not fetch the fasta sequences, dumping the sequence IDs instead."
+            "Could not fetch the fasta sequences, dumping the sequence IDs instead."
         )
         log.warning(
             "This is probably due to the NCBI server being inaccessible. Please try again later or manually download the sequences from NCBI"
