@@ -33,7 +33,6 @@ def fetch_data(link_list):
 
     data = []
     for _, link in enumerate(link_list):
-
         if ".txt" in link:
             link_data = get_data_from_txt(link)
         else:
@@ -242,7 +241,6 @@ def fetch_links(enzyme_class, family, subfamily):
             # Get page list for the family
             page_index_list = soup.findAll(name="a", attrs={"class": "lien_pagination"})
             if bool(page_index_list):
-
                 # =====================#
                 # be careful with this #
                 first_page_idx = int(re.findall(r"=(\d*)#", str(page_index_list[0]))[0])
