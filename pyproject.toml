@@ -1,2 +1,39 @@
 [tool.pytest.ini_options]
 pythonpath = ["src"]
+
+[tool.poetry]
+name = "cazy-parser"
+version = "2.0.1"
+description = "A way to extract specific information from CAZy"
+authors = ["Rodrigo V. Honorato <r.vargashonorato@uu.nl>"]
+readme = "README.md"
+packages = [{ include = "cazy_parser" }]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Science/Research",
+  "Topic :: Scientific/Engineering :: Bio-Informatics",
+  "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+  "Programming Language :: Python :: 3.9",
+]
+keywords = ["cazy", "database", "datamining"]
+license = "GPLv3"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+beautifulsoup4 = "^4.11.1"
+requests = "^2.27.1"
+biopython = "^1.81"
+progressbar = "^2.5"
+
+[tool.poetry.group.test.dependencies]
+pytest = "*"
+pytest-cov = "*"
+coverage = "*"
+hypothesis = "*"
+
+[tool.poetry.scripts]
+cazy-parser = 'cazy_parser.cli:maincli'
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
