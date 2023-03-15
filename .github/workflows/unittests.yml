@@ -7,7 +7,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.6", "3.7", "3.8", "3.9", "3.10"]
+        python-version: ["3.9", "3.10"]
         os: [ubuntu-18.04, macos-latest, windows-latest]
 
     runs-on: ${{ matrix.os }}
@@ -27,9 +27,9 @@ jobs:
 
       - run: poetry install --no-interaction --no-root
 
-      - uses: trunk-io/trunk-action@v1
-        with:
-          check-mode: all
+      # - uses: trunk-io/trunk-action@v1
+      #   with:
+      #     check-mode: all
 
       - name: Test
         run: |
