@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from cazy_parser.modules.fasta import download_fastas, dump_fastas
+from cazy_parser.modules.fasta import download_fastas, dump_fastas, dump_id_list
 
 
 @pytest.fixture
@@ -21,6 +21,14 @@ def test_download_fastas(id_list):
 def test_dump_fastas(id_list):
     temp_f = tempfile.NamedTemporaryFile(delete=False)
     dump_fastas(id_list, temp_f.name)
+
+    assert Path(temp_f.name).exists()
+    assert Path(temp_f.name).stat().st_size != 0
+
+
+def test_dump_id_list(id_list):
+    temp_f = tempfile.NamedTemporaryFile(delete=False)
+    dump_id_list(id_list, temp_f.name)
 
     assert Path(temp_f.name).exists()
     assert Path(temp_f.name).stat().st_size != 0

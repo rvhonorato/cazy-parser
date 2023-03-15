@@ -52,3 +52,10 @@ def dump_fastas(id_list, output_f):
     with open(output_f, "w") as fh:
         for fasta in fasta_list:
             fh.write(fasta)
+
+
+def dump_id_list(id_list: list[str], output_f: str) -> None:
+    """Save the id list to a file."""
+    with open(output_f, "w") as fh:
+        for id_ in id_list:
+            fh.write(f"{id_}{os.linesep}")
