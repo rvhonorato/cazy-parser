@@ -1,8 +1,8 @@
 ---
-title: 'CAZy-parser a way to extract information from the Carbohydrate-Active enZYmes Database'
+title: "CAZy-parser a way to extract information from the Carbohydrate-Active enZYmes Database"
 tags:
- - datamining
- - cazy
+  - datamining
+  - cazy
 authors:
   - name: Rodrigo V Honorato
     orcid: 0000-0001-5267-3002
