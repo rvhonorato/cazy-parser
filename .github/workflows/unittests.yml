@@ -33,7 +33,7 @@ jobs:
 
       - name: Test
         run: |
-          poetry run pytest --cov=./ --cov-report=xml -v
+          poetry run pytest --cov=cazy_parser/ --cov-report=xml -v
 
       - name: Run codacy-coverage-reporter
         uses: codacy/codacy-coverage-reporter-action@v1
