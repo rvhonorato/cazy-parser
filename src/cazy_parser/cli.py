@@ -97,7 +97,7 @@ def main(enzyme_class, family, subfamily, characterized):
     log.info("-" * 42)
 
     if enzyme_class not in ENZYME_LIST:
-        logging.error(f"Enzyme class {enzyme_class} not supportes")
+        logging.error(f"Enzyme class {enzyme_class} not supported")
         sys.exit()
     else:
         enzyme_name = ENZYME_LIST[enzyme_class]
