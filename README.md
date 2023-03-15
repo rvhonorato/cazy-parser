@@ -4,7 +4,6 @@ _A way to extract specific information from the Carbohydrate-Active enZYmes._
 
 [![Downloads](https://pepy.tech/badge/cazy-parser)](https://pepy.tech/project/cazy-parser)
 [![status](http://joss.theoj.org/papers/f709afe5d720fc6eee82fca277942a46/status.svg)](http://joss.theoj.org/papers/f709afe5d720fc6eee82fca277942a46)
-[![python lint](https://github.com/rvhonorato/cazy-parser/actions/workflows/lint.yml/badge.svg?branch=main)](https://github.com/rvhonorato/cazy-parser/actions/workflows/lint.yml)
 [![unittests](https://github.com/rvhonorato/cazy-parser/actions/workflows/unittests.yml/badge.svg?branch=main)](https://github.com/rvhonorato/cazy-parser/actions/workflows/unittests.yml)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/33f087332ec24da689268a13d2f4ca23)](https://www.codacy.com/gh/rvhonorato/cazy-parser/dashboard?utm_source=github.com&utm_medium=referral&utm_content=rvhonorato/cazy-parser&utm_campaign=Badge_Grade)
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/33f087332ec24da689268a13d2f4ca23)](https://www.codacy.com/gh/rvhonorato/cazy-parser/dashboard?utm_source=github.com&utm_medium=referral&utm_content=rvhonorato/cazy-parser&utm_campaign=Badge_Coverage)
