@@ -2,9 +2,10 @@ import argparse
 import logging
 import sys
 import time
+from pathlib import Path
 
 from cazy_parser import ENZYME_LIST
-from cazy_parser.modules.fasta import dump_fastas
+from cazy_parser.modules.fasta import dump_fastas, dump_id_list
 from cazy_parser.modules.html import retrieve_genbank_ids
 from cazy_parser.version import VERSION
 
@@ -14,9 +15,6 @@ formatter = logging.Formatter(" [%(asctime)s %(lineno)d %(levelname)s] %(message
 ch.setFormatter(formatter)
 log.addHandler(ch)
 log.setLevel("DEBUG")
-
-
-# CONFIG = json.load(open(Path(Path(__file__).parents[2], "etc/config.json")))
 
 # ===========================================================================================================
 # Define arguments
@@ -97,8 +95,8 @@ def main(enzyme_class, family, subfamily, characterized):
     log.info("-" * 42)
 
     if enzyme_class not in ENZYME_LIST:
-        logging.error(f"Enzyme class {enzyme_class} not supportes")
-        sys.exit()
+        log.error(f"Enzyme class {enzyme_class} not supported.")
+        sys.exit(1)
     else:
         enzyme_name = ENZYME_LIST[enzyme_class]
 
@@ -112,7 +110,20 @@ def main(enzyme_class, family, subfamily, characterized):
 
     today = time.strftime("%d%m%Y")
     output_fname += f"_{today}.fasta"
-    dump_fastas(id_list, output_fname)
+    try:
+        dump_fastas(id_list, output_fname)
+    except Exception as e:
+        output_fname = Path(output_fname).stem + ".txt"
+        log.warning(
+            f"Could not fetch the fasta sequences, dumping the sequence IDs instead."
+        )
+        log.warning(
+            "This is probably due to the NCBI server being inaccessible. Please try again later or manually download the sequences from NCBI"
+        )
+        log.warning(
+            f"Please upload {output_fname} to `https://www.ncbi.nlm.nih.gov/sites/batchentrez` to download the sequences"
+        )
+        dump_id_list(id_list, output_fname)
 
 
 if __name__ == "__main__":
