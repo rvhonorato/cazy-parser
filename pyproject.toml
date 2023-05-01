@@ -28,10 +28,10 @@ biopython = "^1.81"
 progressbar2 = "^4.2.0"
 
 [tool.poetry.group.test.dependencies]
-pytest = "*"
-pytest-cov = "*"
-coverage = "*"
-hypothesis = "*"
+pytest = "^7.3.1"
+pytest-cov = "^4.0.0"
+coverage = "^7.2.5"
+hypothesis = "^6.75.1"
 
 [tool.poetry.scripts]
 cazy-parser = 'cazy_parser.cli:maincli'
