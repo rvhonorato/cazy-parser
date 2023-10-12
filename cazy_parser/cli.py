@@ -22,14 +22,6 @@ log.setLevel("DEBUG")
 def main():
     """Main function."""
 
-    log.info("-" * 42)
-    log.info("")
-    log.info("┌─┐┌─┐┌─┐┬ ┬   ┌─┐┌─┐┬─┐┌─┐┌─┐┬─┐")
-    log.info("│  ├─┤┌─┘└┬┘───├─┘├─┤├┬┘└─┐├┤ ├┬┘")
-    log.info(f"└─┘┴ ┴└─┘ ┴    ┴  ┴ ┴┴└─└─┘└─┘┴└─ v{VERSION}")
-    log.info("")
-    log.info("-" * 42)
-
     ap = argparse.ArgumentParser()
 
     ap.add_argument(
@@ -70,6 +62,14 @@ def main():
         output_fname += f"_{args.subfamily}"
     if args.characterized:
         output_fname += "_characterized"
+
+    log.info("-" * 42)
+    log.info("")
+    log.info("┌─┐┌─┐┌─┐┬ ┬   ┌─┐┌─┐┬─┐┌─┐┌─┐┬─┐")
+    log.info("│  ├─┤┌─┘└┬┘───├─┘├─┤├┬┘└─┐├┤ ├┬┘")
+    log.info(f"└─┘┴ ┴└─┘ ┴    ┴  ┴ ┴┴└─└─┘└─┘┴└─ v{VERSION}")
+    log.info("")
+    log.info("-" * 42)
 
     today = time.strftime("%d%m%Y")
     output_fname += f"_{today}.fasta"

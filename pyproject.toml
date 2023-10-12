@@ -3,9 +3,9 @@ pythonpath = ["src"]
 
 [tool.poetry]
 name = "cazy-parser"
-version = "2.0.2"
+version = "2.0.3"
 description = "A way to extract specific information from CAZy"
-authors = ["Rodrigo V. Honorato <r.vargashonorato@uu.nl>"]
+authors = ["Rodrigo V. Honorato <rvhonorato@protonmail.com>"]
 readme = "README.md"
 packages = [{ include = "cazy_parser" }]
 classifiers = [
@@ -34,7 +34,7 @@ coverage = "^7.2.5"
 hypothesis = "^6.75.1"
 
 [tool.poetry.scripts]
-cazy-parser = 'cazy_parser.cli:maincli'
+cazy-parser = 'cazy_parser.cli:main'
 
 [build-system]
 requires = ["poetry-core"]
