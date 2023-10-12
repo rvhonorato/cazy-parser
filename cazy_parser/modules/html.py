@@ -5,6 +5,8 @@ import re
 import string
 import sys
 import urllib
+import urllib.request
+from typing import Optional
 
 import requests
 from bs4 import BeautifulSoup
@@ -176,21 +178,13 @@ def get_data_from_txt(link):
     return data_list
 
 
-def fetch_links(enzyme_class, family, subfamily):
-    """
-    Fetch link structure for an enzyme class.
-
-    Parameters
-    ----------
-    enzyme_class : str
-        Enzyme class to fetch links for.
-
-    Returns
-    -------
-    page_list : list
-        List of links to the pages.
-
-    """
+def fetch_links(
+    enzyme_class: str,
+    family: Optional[int] = None,
+    subfamily: Optional[int] = None,
+    characterized: Optional[bool] = None,
+) -> list[str]:
+    """Fetch link structure for an enzyme class."""
 
     main_class_link = f"http://www.cazy.org/{enzyme_class}.html"
     log.info(f"Fetching links for {enzyme_class}, url: {main_class_link}")
@@ -204,6 +198,9 @@ def fetch_links(enzyme_class, family, subfamily):
         else:
             log.info(f"Only using links of family {family}")
             family_list = [e for e in family_list if int(e[2:]) == family]
+
+    if characterized:
+        log.info("Only using characterized links")
 
     if not family_list:
         log.error("No links were found.")
@@ -258,6 +255,9 @@ def fetch_links(enzyme_class, family, subfamily):
 
             else:
                 page_list.append(page_zero)
+
+    if characterized:
+        page_list = [e for e in page_list if "characterized" in e]
 
     return page_list
 
@@ -341,28 +341,11 @@ def fetch_species():
     return species_dic
 
 
-def retrieve_genbank_ids(enzyme_name, family=None, subfamily=None, characterized=None):
-    """
-    Retrieve genbank IDs for a given enzyme.
-
-    Parameters
-    ----------
-    enzyme_name : str
-        Enzyme name to retrieve genbank IDs for.
-    family : int
-        Family number to retrieve genbank IDs for.
-    subfamily : int
-        Subfamily number to retrieve genbank IDs for.
-    characterized : bool
-        Whether to retrieve genbank IDs for characterized enzymes.
-
-    Returns
-    -------
-    genbank_id_list : list
-        List of genbank IDs.
-
-    """
-    page_list = fetch_links(enzyme_name, family, subfamily)
+def retrieve_genbank_ids(
+    enzyme_name: str, family: int, subfamily: int, characterized: bool
+) -> list[str]:
+    """Retrieve genbank IDs for a given enzyme."""
+    page_list = fetch_links(enzyme_name, family, subfamily, characterized)
     data = fetch_data(page_list)
     genbank_id_list = []
     for element in data:

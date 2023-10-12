@@ -1,4 +1,4 @@
-import urllib
+import urllib.request
 
 import pytest
 from bs4 import BeautifulSoup
@@ -78,7 +78,12 @@ def test_get_data_from_txt():
 
 
 def test_fetch_links():
-    observed_links = fetch_links("Carbohydrate-Esterases", family=None, subfamily=None)
+    observed_links = fetch_links("Carbohydrate-Esterases", characterized=True)
+
+    assert "http://www.cazy.org/CE20_characterized.html" in observed_links
+    assert "http://www.cazy.org/IMG/cazy_data/CE20.txt" not in observed_links
+
+    observed_links = fetch_links("Carbohydrate-Esterases", characterized=False)
 
     assert "http://www.cazy.org/CE20_characterized.html" in observed_links
     assert "http://www.cazy.org/IMG/cazy_data/CE20.txt" in observed_links
@@ -99,8 +104,15 @@ def test_fetch_species():
 
 def test_retrieve_genbank_ids():
     observed_id_list = retrieve_genbank_ids(
-        enzyme_name="Glycoside-Hydrolases", family=5, subfamily=1
+        enzyme_name="Glycoside-Hydrolases", family=5, subfamily=1, characterized=False
     )
 
     assert observed_id_list
     assert len(observed_id_list) >= 1223
+
+    observed_id_list = retrieve_genbank_ids(
+        enzyme_name="Glycoside-Hydrolases", family=5, subfamily=1, characterized=True
+    )
+
+    assert observed_id_list
+    assert 36 <= len(observed_id_list) <= 1000
