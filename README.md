@@ -19,6 +19,10 @@ License: [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.html)
 
 doi: 10.21105/joss.00053
 
+## Recommendation
+
+[`cazy_webscraper`](https://github.com/HobnobMancer/cazy_webscraper) provides broader functionality by integrating CAZy data with external resources (protein sequences, taxonomy, and structures) to build comprehensive local databases for large-scale analyses. It also includes additional features for taxonomic exploration and structural analysis that aren't available here.
+
 ## Introduction
 
 _cazy-parser_ is a tool that extract information from [CAZy](http://www.cazy.org/) in a more usable and readable format. Firstly, a script reads the HTML structure and creates a mirror of the database as a tab delimited file. Secondly, information is extracted from the database according to user inputted parameters and presented to the user as a set of accession codes.
